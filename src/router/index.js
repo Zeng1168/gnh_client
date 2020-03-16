@@ -8,7 +8,12 @@ export default new Router({
         name: 'login',
         component: () =>
             import ('../components/Login.vue')
-    }, {
+    } {
+        path: '/sign',
+        name: 'sign',
+        component: () =>
+            import ('../components/Sign.vue')
+    }, , {
         path: '/main',
         name: 'main',
         component: () =>

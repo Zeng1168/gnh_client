@@ -1,11 +1,12 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import Vuex from 'vuex' // 引入vuex
+// import Vuex from 'vuex' // 引入vuex
 import App from './App'
 import router from './router'
+import store from './store'
 Vue.config.productionTip = false
-Vue.use(Vuex)
+// Vue.use(Vuex)
 
 
 // 引入Element
@@ -13,10 +14,19 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
+// 引入axios
+import axios from 'axios'
+axios.baseURL="http://127.0.0.1:21305"
+Vue.prototype.$axios = axios
+
+//引入QS
+import qs from 'qs'
+Vue.prototype.qs = qs
+
 // 自定义封装http
 import {get, post } from './functions/http'
 Vue.prototype.$get = get;
-Vue.prototype.$post = post;
+Vue.prototype.post = post;
 
 // 引入css
 import './assets/css/gnh.css' // 自定义样式
@@ -34,6 +44,7 @@ Vue.use(globalFunctions)
 new Vue({
     el: '#app',
     router,
+    store:store,
     components: { App },
     template: '<App/>'
 })

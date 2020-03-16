@@ -1,0 +1,140 @@
+/*  上边距  */
+
+.mtop-5 {
+    margin-top: 5px;
+}
+
+.mtop-10 {
+    margin-top: 10px;
+}
+
+.mtop-15 {
+    margin-top: 15px;
+}
+
+.mtop-20 {
+    margin-top: 20px;
+}
+
+.mtop-25 {
+    margin-top: 25px;
+}
+
+.mtop-30 {
+    margin-top: 30px;
+}
+
+.mtop-50 {
+    margin-top: 50px;
+}
+
+
+/* 下边距 */
+
+.mbot-5 {
+    margin-bottom: 5px;
+}
+
+.mbot-10 {
+    margin-bottom: 10px;
+}
+
+.mbot-15 {
+    margin-bottom: 15px;
+}
+
+.mbot-20 {
+    margin-bottom: 20px;
+}
+
+.mbot-25 {
+    margin-bottom: 25px;
+}
+
+.mbot-30 {
+    margin-bottom: 30px;
+}
+
+.mbot-50 {
+    margin-bottom: 50px;
+}
+
+
+/* 左边距 */
+
+.mlef-5 {
+    margin-left: 5px;
+}
+
+.mlef-10 {
+    margin-left: 10px;
+}
+
+.mlef-15 {
+    margin-left: 15px;
+}
+
+.mlef-20 {
+    margin-left: 20px;
+}
+
+.mlef-25 {
+    margin-left: 25px;
+}
+
+.mlef-30 {
+    margin-left: 30px;
+}
+
+.mlef-50 {
+    margin-left: 50px;
+}
+
+
+/* 右边距 */
+
+.mrig-5 {
+    margin-right: 5px;
+}
+
+.mrig-10 {
+    margin-right: 10px;
+}
+
+.mrig-15 {
+    margin-right: 15px;
+}
+
+.mrig-20 {
+    margin-right: 20px;
+}
+
+.mrig-25 {
+    margin-right: 25px;
+}
+
+.mrig-30 {
+    margin-right: 30px;
+}
+
+.mrig-50 {
+    margin-right: 50px;
+}
+
+
+/*  字体颜色  */
+
+.fc-red {
+    color: red;
+}
+
+
+/* 左右浮动 */
+
+.fl-left {
+    float: left;
+}
+
+.fl-right {
+    float: right;
+}

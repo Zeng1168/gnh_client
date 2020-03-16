@@ -4,6 +4,14 @@
 Gannan HomeWork Assistant 作业助手客户端
 ## Build Setup
 
+
+安装
+cnpm install
+cnpm i element-ui -S
+cnpm install vue-axios --save
+cnpm install qs.js --save
+cnpm install vuex --save
+
 ``` bash
 # install dependencies
 npm install

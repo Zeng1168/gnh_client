@@ -1,7 +1,7 @@
 # gnh_client
-Gannan HomeWork Assistant 作业助手客户端
-> 
 
+> 
+Gannan HomeWork Assistant 作业助手客户端
 ## Build Setup
 
 ``` bash

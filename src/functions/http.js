@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Message } from 'element-ui';
+// import { Message } from 'element-ui';
 import router from '../router' // 引入路由
 import qs from 'qs' // 使用qs对post传送的据序列化
 

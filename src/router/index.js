@@ -1,32 +1,43 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-Vue.use(Router)
+import VueRouter from 'vue-router'
 
-export default new Router({
-    routes: [{
+Vue.use(VueRouter)
+
+const routes = [{
         path: '/',
-        redirect: '/login',
-    },{
-        path: '/login',
-        name: 'login',
-        component: () => import ('../components/Login/Login.vue')
-    }, {
-        path: '/Register',
-        name: 'Register',
-        component: () =>
-            import ('../components/Login/Register.vue')
-    },{
-        path: '/retrievepwd',
-        name: 'retrievepwd',
-        component: () =>
-            import ('../components/Login/retrievepwd.vue')
-    }, {
+        redirect: '/main',
+    },
+    // {
+    //     path: '/login',
+    //     name: 'login',
+    //     component: () =>
+    //         import ('../components/Login/Login.vue')
+    // }, {
+    //     path: '/Register',
+    //     name: 'Register',
+    //     component: () =>
+    //         import ('../components/Login/Register.vue')
+    // }, {
+    //     path: '/retrievepwd',
+    //     name: 'retrievepwd',
+    //     component: () =>
+    //         import ('../components/Login/Retrievepwd.vue')
+    // }, 
+    {
         path: '/main',
         name: 'main',
         component: () =>
             import ('../components/Main.vue'),
         children: [
-            
+
         ]
-    }]
+    }
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
+
+export default router

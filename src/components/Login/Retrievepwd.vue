@@ -79,30 +79,15 @@ export default {
             if( !this.bindPhone |  (this.password2==='') | (this.password2==='')){
                 this.warnMsg("请填写完整");
             }
-            else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(this.bindPhone))){
-                this.warnMsg("手机号有误");
-            }
             else if (!(this.password1===this.password2)){
                 this.warnMsg("密码不一致");
             }
-            else if (this.VerificationCode===''){
-                this.warnMsg("请填写验证码!");
+            else if(this.tureVerificationCode!=this.VerificationCode | this.VerificationCode===''){
+                this.warnMsg("验证码错误");
             }
             else{
-                 console.log("找回密码");
-                this.$axios.patch('/userAccount/passwordRetrieve?bindPhone='
-                    +this.bindPhone+'&password='
-                    +this.password1+'&smsCode='+this.VerificationCode )
-                .then(res =>{
-                    console.log(res);
-                    if(res.data.status === 0){
-                        this.succMsg(res.data.msg);
-                        this.$router.push('/login');
-                    }
-                    else{
-                        this.warnMsg(res.data.msg);
-                    }
-                })
+                 console.log("登录")
+                 
             }
            
         },
@@ -111,23 +96,9 @@ export default {
             if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(this.bindPhone))){
                this.warnMsg("手机号有误")
             }
-            else {
-               
+            else{
+               this.countDown(60); 
                //发送请求验证码
-               this.$axios.get('/userAccount/getRetrieveSms?bindPhone='+this.bindPhone)
-               .then(res =>{
-                   console.log(res);
-                   if(res.data.status === 0){
-                         this.succMsg(res.data.msg);
-                         this.countDown(60); 
-                   }
-                   else{
-                       this.warnMsg(res.data.msg);
-                   }
-               })
-               .catch(err =>{
-                   console.log(err);
-               })
             }
             
         },
@@ -184,6 +155,4 @@ a{
     text-decoration: none;
     color:azure;
 }
-</style>
-
 </style>

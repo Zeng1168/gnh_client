@@ -1,7 +1,7 @@
 <template>
-  <el-container id="app">
+  <div id="app">
     <router-view/>
-  </el-container>
+  </div>
 </template>
 
 <script>
@@ -24,6 +24,10 @@ html,body,#app{
   height:100%;
   margin: 0;
   padding: 0;
+}
+
+.selector-for-some-widget {
+  box-sizing: content-box;
 }
 
 ::-webkit-scrollbar {

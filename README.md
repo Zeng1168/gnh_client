@@ -11,6 +11,7 @@ cnpm i element-ui -S
 cnpm install vue-axios --save
 cnpm install qs.js --save
 cnpm install vuex --save
+npm install --save crypto-js
 
 ``` bash
 # install dependencies

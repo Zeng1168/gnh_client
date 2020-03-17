@@ -8,6 +8,8 @@ import store from './store'
 Vue.config.productionTip = false
 // Vue.use(Vuex)
 
+import CryptoJS from "crypto-js";
+Vue.prototype.CryptoJS = CryptoJS;
 
 // 引入Element
 import ElementUI from 'element-ui'

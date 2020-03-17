@@ -7,18 +7,28 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     user: {
-        u_sudent_id: '180706031',
-        u_name: '',
-        loginTime: 0
+        id:'',
+        bindPhone:'',
+        studentId:'',
+        name:'',
+        password:'',
+        headPicture:'',
+        creationTime:'',
+        loginTime:'',
     },
     userPerm: {}
 },
 mutations: {
     setUser(state, data) {
-        // state.user.u_num = data.u_num;
-        // state.user.u_name = data.u_name;
-        // state.user.loginTime = data.loginTime;
-        // console.log(state.user);
+        console.log("---");
+        console.log(data);
+        state.user.id = data.id;
+        state.user.bindPhone = data.bindPhone;
+        state.user.studentId = data.studentId;
+        state.user.name = data.name;
+        state.user.headPicture =  data.headPicture
+        state.user.creationTime = data.creationTime;
+        state.user.loginTime = new Date();
     },
     userLogin(state, data) {
           state.user.loginTime = data;

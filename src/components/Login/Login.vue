@@ -10,7 +10,7 @@
                     </div>
                     <!-- //密码登录 -->
                     <el-form style="min-height:40vh;" v-if="loginByPwd" ref="form" label-width="80px">
-                        <el-form-item label="手机">
+                        <el-form-item label="手机号">
                             <el-input v-model="bindPhone"></el-input>
                         </el-form-item><br/>
                         <el-form-item label="密码" >
@@ -81,22 +81,14 @@ export default {
             passwords:'',    
             telephone:'',   //手机号
             VerificationCode:'', //验证码
-            tureVerificationCode:'',
         }
     },
     mounted(){
-        // if(this.notEmptyN(localStorage.getItem('shdgvcsydcush'))){
-        //     this.save=true;
-        //     this.username=localStorage.getItem('shdgvcsydcush');
-        //     this.password=this.uncompile(localStorage.getItem('jsduvcydsvbcjdfg'));
-        // }
+        this.getCookie();   //读取cookie的密码
     },
     methods:{
         //密码登录
         onSubmitbypwd() {
-            var userPack={};
-            userPack.u_num=parseInt(this.bindPhone);
-            userPack.u_password=this.password;
             console.log('密码登录');
             console.log(this.bindPhone);
             console.log(this.passwords);
@@ -112,6 +104,14 @@ export default {
                     console.log(res);
                     if(res.data.status===0){    //登录成功
                         this.Msg(res.data.msg);
+                        this.$store.dispatch('setUserFun',res.data.data);   //保存用户信息在vuex
+                        // sessionStorage.setItem('UserInfo',res.data.data) //保存用户信息 在sessionStorage
+                        if(this.save){  //选择了保存密码
+                             this.setCookie(this.bindPhone,this.passwords,7) //保存7天在cookie
+                        }
+                        else{
+                             this.clearCookie();    //清除cookie
+                        }    
                         this.$router.push('/main');
                     }
                     else{
@@ -121,42 +121,8 @@ export default {
                 .catch(err =>{
                     console.log(err);
                 })
-                // this.$axios.get('/user/selectById?id=1')
-                // .then(res =>{
-                //     console.log(res);
-                // })
-                // .catch(err =>{
-                //     console.log(err);
-                // })
-                //  this.$router.push('/main');
             }
-            //  this.$router.push('/main');
-            // this.$axios.post('user/login',this.qs.stringify(userPack),{
-            //     headers: {
-            //         'Access-Control-Allow-Origin': '*',
-            //         'Access-Control-Allow-Methods': 'POST',
-            //         'Access-Control-Allow-Headers': 'x-requested-with,content-type'
-            //     }
-            // }).then(response=>{
-            //     if(response.data.status==0){
-            //         response.data.message.loginTime= Date.parse(new Date())
-            //          this.$router.replace('/main');
-            //         // this.$store.commit('userLogin',response.data.message);
-            //         //this.$router.push({path:'/Homepage'});
-            //         if(this.save){
-            //             localStorage.setItem('shdgvcsydcush',this.username);
-            //             localStorage.setItem('jsduvcydsvbcjdfg',this.compile(this.password));
-            //         }else{
-            //             localStorage.setItem('shdgvcsydcush','');
-            //             localStorage.setItem('jsduvcydsvbcjdfg','');
-            //         }
-            //     }else{
-            //         this.warnMsg(response.data.message);
-            //     }
-            //     }).catch(error=>{
-            //         console.log(error);
-            //         this.warnMsg('服务器异常!');
-            //     });
+ 
         },
         //手机登录
         onSubmitbytel(){
@@ -167,9 +133,6 @@ export default {
             if(this.telephone ===''){
                  this.warnMsg("请填写手机号");
             }
-            // else if(this.VerificationCode!=this.trueVerificationCode){
-            //     this.warnMsg("验证码有误");
-            // }
             else{
                 //验证码验证登录
                 this.$axios.post('userAccount/smsLogin',this.qs.stringify({bindPhone:this.telephone,smsCode:this.VerificationCode}))
@@ -177,6 +140,7 @@ export default {
                     console.log(res);
                     if(res.data.status === 0){  //短信验证登录成功
                         this.Msg(res.data.msg);
+                        this.$store.dispatch('setUserFun',res.data.data);   //存在vuex中
                         this.$router.push('/main');
                     }
                     else {
@@ -192,7 +156,6 @@ export default {
                this.warnMsg("手机号有误")
             }
             else{
-               
                //发送请求验证码
                this.$axios.get('userAccount/getLoginSms?phone='+this.telephone)
                .then(res =>{
@@ -222,23 +185,43 @@ export default {
           this.countDown(time)
         }, 1000)
       },
-        // 加密函数
-        compile(code){    
-            var c=String.fromCharCode(code.charCodeAt(0)+code.length);  
-            for(var i=1;i<code.length;i++){  
-                c+=String.fromCharCode(code.charCodeAt(i)+code.charCodeAt(i-1));  
-            }  
-            return escape(c);  
-        }, 
-        // 解密函数
-        uncompile(code){  
-            code=unescape(code);  
-            var c=String.fromCharCode(code.charCodeAt(0)-code.length);  
-            for(var i=1;i<code.length;i++){  
-                c+=String.fromCharCode(code.charCodeAt(i)-c.charCodeAt(i-1));  
-            }  
-            return c;  
-        } 
+    //设置cookie 用于保存账号密码
+    setCookie(account, password, exdays) {
+      // Encrypt，加密账号密码
+      var cipherAccount = this.CryptoJS.AES.encrypt( account+'', "secretkey123" ).toString();
+      var cipherPassword = this.CryptoJS.AES.encrypt(password+'', "secretkey123").toString();
+      //console.log(cipherAccount+'/'+cipherPassword)//打印一下看看有没有加密成功
+      var exdate = new Date(); //获取时间
+      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); //保存的天数
+      //字符串拼接cookie,加密后的字符串也有个=号,所以用==
+      window.document.cookie =  "account" +  "==" + cipherAccount + ";path=/;expires=" + exdate.toGMTString();
+      window.document.cookie = "password" + "==" + cipherPassword + ";path=/;expires=" + exdate.toGMTString();
+    },
+    //读取cookie  
+    getCookie: function() {
+      if (document.cookie.length != 0) {
+        var arr = document.cookie.split("; "); 
+        for (var i = 0; i < arr.length; i++) {
+          var arr2 = arr[i].split("=="); //根据==切割
+          //判断查找相对应的值
+          if (arr2[0] == "account") {
+            // Decrypt，将解密后的内容赋值给账号
+            var bytes = this.CryptoJS.AES.decrypt(arr2[1], "secretkey123");
+           // console.log("账号"+bytes.toString(this.CryptoJS.enc.Utf8));
+            this.bindPhone = bytes.toString(this.CryptoJS.enc.Utf8)-0;
+          } else if (arr2[0] == "password") {
+            // Decrypt，将解密后的内容赋值给密码
+            var bytes = this.CryptoJS.AES.decrypt(arr2[1], "secretkey123");
+          //  console.log("密码"+bytes.toString(this.CryptoJS.enc.Utf8));
+            this.passwords = bytes.toString(this.CryptoJS.enc.Utf8);
+          }
+        }
+      }
+    },
+    //清除cookie
+    clearCookie: function() {
+      this.setCookie("", "", -1); 
+    },
     }
 }
 </script>

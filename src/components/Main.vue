@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-header style="">
-            <el-menu 
+            <!-- <el-menu 
             :default-active="activeIndex" 
             class="el-menu-demo"  
             mode="horizontal" 
@@ -25,10 +25,12 @@
                 <el-menu-item index="2-4-3">选项3</el-menu-item>
                 </el-submenu>
             </el-submenu>
-            </el-menu>
+            </el-menu> -->
         </el-header>
-        <!-- {{this.$store.state.user}} -->
+        
         <el-main>
+            {{this.$store.state.user}}
+          
             <router-view/>
         </el-main>
         <el-footer class="copy-right" style="min-height:50px;">

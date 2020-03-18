@@ -3,24 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [
-    // {
-    //     path: '/login',
-    //     name: 'login',
-    //     component: () =>
-    //         import ('../components/Login/Login.vue')
-    // }, {
-    //     path: '/Register',
-    //     name: 'Register',
-    //     component: () =>
-    //         import ('../components/Login/Register.vue')
-    // }, {
-    //     path: '/retrievepwd',
-    //     name: 'retrievepwd',
-    //     component: () =>
-    //         import ('../components/Login/Retrievepwd.vue')
-    // }, 
-    {
+const routes = [{
         path: '/main',
         name: 'main',
         component: () =>
@@ -30,6 +13,22 @@ const routes = [
             name: "home",
             component: () =>
                 import ('../components/Home/Home.vue')
+        }, {
+            path: 'group',
+            name: "group",
+            component: () =>
+                import ('../components/Group/Group.vue'),
+            children: [{
+                path: 'task',
+                name: 'studyTask',
+                component: () =>
+                    import ('../components/Group/StudyTask.vue')
+            }, {
+                path: 'members',
+                name: 'groupMembers',
+                component: () =>
+                    import ('../components/Group/Members.vue')
+            }]
         }]
     },
     {

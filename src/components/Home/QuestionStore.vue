@@ -8,7 +8,7 @@
             <template solt:footer>
                 <b-row>
                     <b-col cols="auto">
-                            <b-icon icon="bar-chart-fill" variant="success"></b-icon>
+                            <b-icon icon="bar-chart-fill" flip-v variant="success"></b-icon>
                             &nbsp;56题
                     </b-col>
                     <b-col cols="auto" align="right">

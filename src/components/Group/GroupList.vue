@@ -1,4 +1,5 @@
 <template>
+<div>
     <b-list-group>
         <b-list-group-item href="#" active class="flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
@@ -38,7 +39,13 @@
 
             <small class="text-muted">Donec id elit non mi porta.</small>
         </b-list-group-item>
-        </b-list-group>
+    </b-list-group>
+    <div style="width:100%;" align="right">
+        <b-button variant="link">
+            <h3>创建群</h3>
+        </b-button>
+    </div>
+</div>
 </template>
 
 

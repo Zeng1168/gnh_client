@@ -4,20 +4,30 @@
             <group-list></group-list>
         </b-col>
         <b-col cols="9">
-            <b-jumbotron class="p-2" bg-variant="light" border-variant="dark"  style="min-height:500px;">
-                <h3 class="m-0 p-0">软件工程作业群</h3>
-                <b-nav tabs>
-                    <b-nav-item to="/main/group/task"  exact exact-active-class="active">
-                        <b-icon icon="pencil" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
-                        学习
-                    </b-nav-item>
-                    <b-nav-item to="/main/group/members" exact exact-active-class="active">
-                        <b-icon icon="people" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
-                        群成员
-                    </b-nav-item>
-                </b-nav>
-                <router-view/>
-            </b-jumbotron>
+            <b-card title="Card Title" no-body>
+                <h3 class="m-2 p-0">软件工程作业群</h3>
+                <b-card-header header-tag="nav">
+                    <b-nav card-header tabs>
+                        <b-nav-item to="/main/group/task" exact exact-active-class="active">
+                            <b-icon icon="pencil" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
+                            学习任务
+                        </b-nav-item>
+                        <b-nav-item to="/main/group/members"  exact exact-active-class="active">
+                            <b-icon icon="people" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
+                            群成员
+                        </b-nav-item>
+                        <b-nav-item to="/main/group/teams" exact exact-active-class="active">
+                            学习小组
+                        </b-nav-item>
+                        <b-nav-item to="/main/group/manage" exact exact-active-class="active">
+                            群管理
+                        </b-nav-item>
+                    </b-nav>
+                </b-card-header>
+                <b-card-body class="text-center">
+                    <router-view/>
+                </b-card-body>
+            </b-card>
         </b-col>
     </b-row>
 </template>
